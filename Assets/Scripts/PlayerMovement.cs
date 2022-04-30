@@ -9,6 +9,11 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody m_rigidbody;
     [SerializeField] private float m_forceMagnitude;
     [SerializeField] private float m_maxVelocity;
+    [SerializeField] private Joystick m_joystick;
+    [SerializeField] private float rotationSpeed;
+
+    [SerializeField] private float m_speed;
+
 
     private Vector3 m_movementDirection;
     // Start is called before the first frame update
@@ -16,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
     {
         m_mainCamera = Camera.main;
         m_rigidbody = GetComponent<Rigidbody>();
+        // m_joystick = FindObjectOfType<Joystick>();
     }
 
     // Update is called once per frame
@@ -23,6 +29,7 @@ public class PlayerMovement : MonoBehaviour
     {
         ProcessInput();
         KeepPlayerOnScreen();
+        RotateToFaceVelocity();
     }
 
     private void FixedUpdate()
@@ -30,6 +37,7 @@ public class PlayerMovement : MonoBehaviour
         if (m_movementDirection == Vector3.zero) return;
         m_rigidbody.AddForce(m_movementDirection * m_forceMagnitude * Time.deltaTime, ForceMode.Force);
         m_rigidbody.velocity = Vector3.ClampMagnitude(m_rigidbody.velocity, m_maxVelocity);
+
     }
 
     private void ProcessInput()
@@ -37,12 +45,10 @@ public class PlayerMovement : MonoBehaviour
         if (Touchscreen.current.primaryTouch.press.isPressed)
         {
             Vector2 touchPos = Touchscreen.current.primaryTouch.position.ReadValue();
-            Debug.Log(touchPos);
-
             Vector3 worldPos = m_mainCamera.ScreenToWorldPoint(touchPos);
-            Debug.Log(worldPos);
 
-            m_movementDirection = transform.position - worldPos;
+            m_movementDirection.x = m_joystick.Horizontal * m_speed;
+            m_movementDirection.y = m_joystick.Vertical * m_speed;
             m_movementDirection.z = 0f;
             m_movementDirection.Normalize();
         }
@@ -77,4 +83,15 @@ public class PlayerMovement : MonoBehaviour
 
         transform.position = newPosition;
     }
+
+    private void RotateToFaceVelocity()
+    {
+        if (m_rigidbody.velocity == Vector3.zero) { return; }
+
+        Quaternion targetRotation = Quaternion.LookRotation(m_rigidbody.velocity, Vector3.back);
+
+        transform.rotation = Quaternion.Lerp(
+            transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+    }
+
 }
