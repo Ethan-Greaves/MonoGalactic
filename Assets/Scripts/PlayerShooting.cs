@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerShooting : MonoBehaviour
 {
     [SerializeField] private Projectile m_projectile;
+    private PlayerController m_playerController;
     private int m_delayBetweenShots = 1;
     private float m_timer;
 
@@ -12,6 +13,7 @@ public class PlayerShooting : MonoBehaviour
     void Start()
     {
         m_timer = m_delayBetweenShots;
+        m_playerController = GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
@@ -20,8 +22,16 @@ public class PlayerShooting : MonoBehaviour
         m_timer -= Time.deltaTime;
         if (m_timer <= 0)
         {
-            Instantiate(m_projectile, gameObject.transform.position, gameObject.transform.rotation);
+            ShootProjectile();
             m_timer = m_delayBetweenShots;
+        }
+    }
+
+    private void ShootProjectile()
+    {
+        if (!m_playerController.CheckJoystickInput())
+        {
+            Instantiate(m_projectile, gameObject.transform.position, gameObject.transform.rotation);
         }
     }
 }

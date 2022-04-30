@@ -6,11 +6,19 @@ public class Asteroid : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        PlayerHealth playerHealth = other.GetComponent<PlayerHealth>();
+        if (other.gameObject.tag == "Player")
+        {
+            PlayerHealth playerHealth = other.GetComponent<PlayerHealth>();
 
-        if (playerHealth == null) { return; }
+            if (playerHealth == null) { return; }
 
-        playerHealth.Crash();
+            playerHealth.Crash();
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
 
     }
 

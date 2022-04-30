@@ -41,10 +41,9 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        // if (collision.gameObject.tag != "Turret" && collision.gameObject.tag != "Player")
-        // {
-        //     Destroy(gameObject);
-        // }
-
+        if (other.gameObject.tag != "Player")
+        {
+            Destroy(gameObject);
+        }
     }
 }
