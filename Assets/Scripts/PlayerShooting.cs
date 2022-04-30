@@ -16,7 +16,7 @@ public class PlayerShooting : MonoBehaviour
         m_playerController = GetComponent<PlayerController>();
     }
 
-    // Update is called once per frame
+    // Update is called once per framee
     void Update()
     {
         m_timer -= Time.deltaTime;
