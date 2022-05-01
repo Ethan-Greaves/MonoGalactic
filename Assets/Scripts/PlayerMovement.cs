@@ -44,8 +44,8 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Touchscreen.current.primaryTouch.press.isPressed)
         {
-            Vector2 touchPos = Touchscreen.current.primaryTouch.position.ReadValue();
-            Vector3 worldPos = m_mainCamera.ScreenToWorldPoint(touchPos);
+            // Vector2 touchPos = Touchscreen.current.primaryTouch.position.ReadValue();
+            // Vector3 worldPos = m_mainCamera.ScreenToWorldPoint(touchPos);
 
             m_movementDirection.x = m_joystick.Horizontal * m_speed;
             m_movementDirection.y = m_joystick.Vertical * m_speed;
