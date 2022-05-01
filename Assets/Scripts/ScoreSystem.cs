@@ -34,5 +34,10 @@ public class ScoreSystem : MonoBehaviour
     {
         shouldCount = true;
     }
+
+    public void AddScore(int toAdd)
+    {
+        score += toAdd;
+    }
 }
 

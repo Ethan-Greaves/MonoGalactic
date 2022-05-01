@@ -46,7 +46,7 @@ public class AdManager : MonoBehaviour, IUnityAdsListener
     public void ShowAd(GameOverHandler gameOverHandler)
     {
         this.m_gameOverHandler = gameOverHandler;
-
+        SoundManager.m_SoundManagerInstance.StopMusic();
         Advertisement.Show("rewardedVideo");
     }
 

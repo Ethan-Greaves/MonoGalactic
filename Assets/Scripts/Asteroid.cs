@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Asteroid : MonoBehaviour
 {
+    [SerializeField] private ScoreSystem m_scoreSystem;
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
@@ -13,6 +14,11 @@ public class Asteroid : MonoBehaviour
             if (playerHealth == null) { return; }
 
             playerHealth.Crash();
+        }
+        else if (other.gameObject.tag == "Projectile")
+        {
+            m_scoreSystem.AddScore(5);
+            Destroy(gameObject);
         }
         else
         {

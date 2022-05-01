@@ -18,6 +18,7 @@ public class GameOverHandler : MonoBehaviour
 
     public void ReturnToMenu()
     {
+        SoundManager.m_SoundManagerInstance.StopMusic();
         GameManager.Instance().GoToMainMenu();
     }
 
@@ -52,5 +53,6 @@ public class GameOverHandler : MonoBehaviour
         m_scoreSystem.startTimer();
         m_asteroidSpawner.enabled = true;
         m_gameOverDisplay.gameObject.SetActive(false);
+        SoundManager.m_SoundManagerInstance.PlaylevelMusic();
     }
 }
