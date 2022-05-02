@@ -49,10 +49,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eeaa2e128779c6342b0b1f8805d9d637, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_forceMagnitude: 850
-  m_maxVelocity: 6
+  m_forceMagnitude: 400
+  m_maxVelocity: 3
   m_joystick: {fileID: 0}
-  rotationSpeed: 6
+  rotationSpeed: 10
   m_speed: 100
 --- !u!54 &950739519659664884
 Rigidbody:
@@ -120,6 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_projectile: {fileID: 469314901, guid: 4452d9e3c92dfd14f9fcff6a31b867c2, type: 3}
+  m_playerHealth: {fileID: 950739519659664843}
 --- !u!64 &506853395
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -168,15 +169,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4433942057210488, guid: f805c7b2f982faf43833878e4f22ae2a, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.1
+      value: 0.07
       objectReference: {fileID: 0}
     - target: {fileID: 4433942057210488, guid: f805c7b2f982faf43833878e4f22ae2a, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.1
+      value: 0.07
       objectReference: {fileID: 0}
     - target: {fileID: 4433942057210488, guid: f805c7b2f982faf43833878e4f22ae2a, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.1
+      value: 0.07
       objectReference: {fileID: 0}
     - target: {fileID: 4433942057210488, guid: f805c7b2f982faf43833878e4f22ae2a, type: 3}
       propertyPath: m_LocalPosition.x

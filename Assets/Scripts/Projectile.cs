@@ -7,6 +7,8 @@ public class Projectile : MonoBehaviour
     [Range(0, 100)]
     [SerializeField] float speed;
     [SerializeField] int damage = 25;
+    [SerializeField] private AudioClip m_projectileSFX;
+
     private Player m_player;
 
     Rigidbody rb;
@@ -28,6 +30,8 @@ public class Projectile : MonoBehaviour
 
     private void FireProjectile()
     {
+        SoundManager.m_SoundManagerInstance.PlaySFX(m_projectileSFX);
+
         // rb = GetComponent<Rigidbody>();
         // rb.velocity = m_player.gameObject.transform.forward * (speed * Time.deltaTime);
         //rb.AddForce(m_player.gameObject.transform.forward * speed);

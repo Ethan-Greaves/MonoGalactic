@@ -7,12 +7,15 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (PlayerPrefs.GetInt(Store.newShipUnlockedKey, 0) == 1)
+        {
+            GetComponentInChildren<Renderer>().material.SetColor("_Color", Color.blue);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

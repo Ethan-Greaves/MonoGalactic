@@ -7,10 +7,12 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     private static GameManager m_GameMangerInstance;
-    private SceneHandler m_SceneHandler;
+    private SceneNavigation m_SceneNavigation;
     private Player m_Player;
     private static bool m_bIsPaused;
-    private static int m_iScore = 0;
+    private static float m_iScore = 0;
+
+    private bool isVibrationTurnedOn;
 
     public static GameManager Instance()
     {
@@ -27,15 +29,13 @@ public class GameManager : MonoBehaviour
     {
         DontDestroyOnLoad(this.gameObject);
         m_bIsPaused = false;
-        m_SceneHandler = Resources.Load<SceneHandler>("SceneManager");
+        isVibrationTurnedOn = false;
+        // m_SceneNavigation = Resources.Load<SceneNavigation>("SceneManager");
 
         if (m_Player != null)
             m_Player = GameObject.FindWithTag("Player").GetComponent<Player>();
 
-        //if (m_MainLevelMusic != null)
 
-        // m_energy = 5;
-        // m_energyRechargeDuration = 1;
     }
     #endregion
 
@@ -51,15 +51,15 @@ public class GameManager : MonoBehaviour
     private void RunPauseFunctionality()
     {
         Time.timeScale = 0f;
-        m_SceneHandler.LoadSceneByNameAdditive("Pause Menu");
+        m_SceneNavigation.LoadSceneByNameAdditive("Pause Menu");
         m_bIsPaused = true;
         // SoundManager.Instance().PauseMusic();
     }
 
     public void ResumeGame()
     {
-        if (m_SceneHandler.IsCurrentScene("Main Level"))
-            m_SceneHandler.RemoveScene("Pause Menu");
+        if (m_SceneNavigation.IsCurrentScene("Main Level"))
+            m_SceneNavigation.RemoveScene("Pause Menu");
 
         Time.timeScale = 1f;
         m_bIsPaused = false;
@@ -76,29 +76,38 @@ public class GameManager : MonoBehaviour
 
     #region SCORE FUNCTIONALITY
 
-    public int GetScore() { return m_iScore; }
+    public float GetScore() { return m_iScore; }
     public void ResetScore() { m_iScore = 0; }
     public void AddScore(int scoreToAdd) { m_iScore += scoreToAdd; }
+
+    public void AddScoreOverTime(float scoreToAdd, float multiplier)
+    {
+        m_iScore += scoreToAdd * Time.deltaTime * multiplier;
+    }
     #endregion
 
     #region GAME STATE FUNCTIONALITY
     public void PlayAgain()
     {
-        // m_SceneHandler.LoadSceneByNameSingle("MainLevel");
         SceneManager.LoadScene(1);
-
-        // SoundManager.Instance().StopMusic();
-    }
-    public void LevelComplete()
-    {
-        m_SceneHandler.LoadSceneByNameSingle("Level Complete");
-        // SoundManager.Instance().StopMusic();
     }
 
     public void GoToMainMenu()
     {
-        // m_SceneHandler.LoadSceneByNameSingle("Menu");
         SceneManager.LoadScene(0);
     }
+    #endregion
+
+    #region VIBRATION
+
+    public bool GetIsVibrationTurnedOn()
+    {
+        return isVibrationTurnedOn;
+    }
+    public void SetIsVibrationTurnedOn(bool value)
+    {
+        isVibrationTurnedOn = value;
+    }
+
     #endregion
 }

@@ -5,8 +5,22 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] private GameOverHandler m_gameOverHandler;
+
+    public bool isShipCrashed { get; private set; }
+
+    private void Start()
+    {
+        isShipCrashed = false;
+    }
     public void Crash()
     {
+        isShipCrashed = true;
+
+        if (GameManager.Instance().GetIsVibrationTurnedOn())
+        {
+            Handheld.Vibrate();
+        }
+
         m_gameOverHandler.EndGame();
         gameObject.SetActive(false);
     }

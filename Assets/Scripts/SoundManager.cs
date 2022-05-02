@@ -10,16 +10,6 @@ public class SoundManager : MonoBehaviour
     private AudioClip m_MainMenuMusic;
     private AudioClip m_MainLevelMusic;
 
-
-    // public static SoundManager Instance()
-    // {
-    //     if (m_SoundManagerInstance == null)
-    //         //Create a gameObject in the hiearchy of type sound manager
-    //         m_SoundManagerInstance = new GameObject("Sound Manager", typeof(SoundManager)).GetComponent<SoundManager>();
-
-    //     return m_SoundManagerInstance;
-    // }
-
     #region GETTERS
     public AudioSource GetMusicAudioSource() { return m_MusicAudioSource; }
     public AudioSource GetSFXAudioSource() { return m_SFXAudioSource; }
@@ -88,6 +78,7 @@ public class SoundManager : MonoBehaviour
     {
         m_SFXAudioSource.PlayOneShot(SFXClips[Random.Range(0, SFXClips.Length - 1)]);
     }
+
 
     public void StopSFX()
     {

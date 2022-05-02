@@ -21,8 +21,6 @@ public class MainMenu : MonoBehaviour
     private void Start()
     {
         SoundManager.m_SoundManagerInstance.PlayMainMenuMusic();
-        // GameManager.Instance().LoadEnergy();
-        // energyText.text = $"Tap to Start ({GameManager.Instance().GetEnergy()})";
 
         energy = PlayerPrefs.GetInt(EnergyKey, maxEnergy);
 

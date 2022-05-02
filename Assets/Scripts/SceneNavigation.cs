@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-// [CreateAssetMenu(fileName = "SceneManager")]
-public class SceneHandler : MonoBehaviour
+public class SceneNavigation : MonoBehaviour
 {
     //Create a stack to store all previous scenes
     private Stack<int> m_LoadedLevels;
@@ -65,11 +64,7 @@ public class SceneHandler : MonoBehaviour
         //Put the current scene onto the stack, essentially saving it
         m_LoadedLevels.Push(GetActiveScene().buildIndex);
 
-        GameManager.Instance().ResetScore();
-        GameManager.Instance().ResumeGame();
-        SceneManager.LoadScene("Main Menu");
-
-        // SoundManager.Instance().StopMusic();
+        SceneManager.LoadScene("Menu");
     }
 
     #endregion
@@ -88,5 +83,3 @@ public class SceneHandler : MonoBehaviour
 
     #endregion
 }
-
-

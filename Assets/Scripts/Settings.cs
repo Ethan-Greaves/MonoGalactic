@@ -11,17 +11,16 @@ public class Settings : MonoBehaviour
     [SerializeField] Slider m_MusicVolumeSlider;
     [SerializeField] Slider m_SFXVolumeSlider;
 
+    [SerializeField] Toggle m_VibrationToggle;
+
 
     private void Awake()
     {
         //This ensures that when going back and forth between screens the slider value always stays consistent
         m_MusicVolumeSlider.value = SoundManager.m_SoundManagerInstance.GetAudioSourceVolume(SoundManager.m_SoundManagerInstance.GetMusicAudioSource());
         m_SFXVolumeSlider.value = SoundManager.m_SoundManagerInstance.GetAudioSourceVolume(SoundManager.m_SoundManagerInstance.GetSFXAudioSource());
-    }
-
-    public void Start()
-    {
-
+        m_VibrationToggle.isOn = GameManager.Instance().GetIsVibrationTurnedOn();
+        
     }
 
     public void AdjustMusicVolume(float musicVol)
@@ -32,6 +31,11 @@ public class Settings : MonoBehaviour
     public void AdjustSFXVolume(float SFXVol)
     {
         SoundManager.m_SoundManagerInstance.GetSFXAudioSource().volume = SFXVol;
+    }
+
+    public void AdjustVibrationToggle(bool value)
+    {
+        GameManager.Instance().SetIsVibrationTurnedOn(value);
     }
 }
 

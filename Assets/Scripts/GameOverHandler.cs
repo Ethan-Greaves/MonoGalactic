@@ -18,6 +18,7 @@ public class GameOverHandler : MonoBehaviour
 
     public void ReturnToMenu()
     {
+        GameManager.Instance().ResetScore();
         SoundManager.m_SoundManagerInstance.StopMusic();
         GameManager.Instance().GoToMainMenu();
     }

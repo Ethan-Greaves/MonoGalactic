@@ -10,15 +10,19 @@ public class ScoreSystem : MonoBehaviour
     [SerializeField] private float scoreMultiplier;
 
     private bool shouldCount = true;
-    private float score;
+    public float score;
 
     void Update()
     {
         if (!shouldCount) { return; }
 
-        score += Time.deltaTime * scoreMultiplier;
+        GameManager.Instance().AddScoreOverTime(1, scoreMultiplier);
+        Debug.Log(score);
+    }
 
-        scoreText.text = Mathf.FloorToInt(score).ToString();
+    private void LateUpdate()
+    {
+        scoreText.text = Mathf.FloorToInt(GameManager.Instance().GetScore()).ToString();
     }
 
     public int EndTimer()
@@ -35,11 +39,9 @@ public class ScoreSystem : MonoBehaviour
         shouldCount = true;
     }
 
-    public void AddScore(int toAdd)
+    public void AddScore(float toAdd)
     {
-        score += toAdd;
-        scoreText.text = Mathf.FloorToInt(score).ToString();
-
+        score += toAdd * scoreMultiplier;
     }
 }
 

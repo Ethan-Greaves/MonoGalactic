@@ -112,6 +112,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 6.6
   damage: 25
+  m_projectileSFX: {fileID: 8300000, guid: a20b92604d42432458659924c242e256, type: 3}
 --- !u!54 &906240917
 Rigidbody:
   m_ObjectHideFlags: 0
