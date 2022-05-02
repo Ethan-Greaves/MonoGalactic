@@ -17,19 +17,19 @@ public class Asteroid : MonoBehaviour
         else if (other.gameObject.tag == "Projectile")
         {
             GameManager.Instance().AddScore(50);
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
         else
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
 
 
     }
 
-    private void OnBecameInvisible()
-    {
-        Destroy(gameObject);
-    }
+    // private void OnBecameInvisible()
+    // {
+    //     Destroy(gameObject);
+    // }
 
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AsteroidSpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject[] asteroidPrefabs;
+    // [SerializeField] private GameObject[] asteroidPrefabs;
     [SerializeField] private float secondsBetweenAsteroids = 1.5f;
     [SerializeField] private Vector2 forceRange;
 
@@ -60,12 +60,13 @@ public class AsteroidSpawner : MonoBehaviour
         Vector3 worldSpawnPoint = mainCamera.ViewportToWorldPoint(spawnPoint);
         worldSpawnPoint.z = 0;
 
-        GameObject selectedAsteroid = asteroidPrefabs[Random.Range(0, asteroidPrefabs.Length)];
+        // GameObject selectedAsteroid = asteroidPrefabs[Random.Range(0, asteroidPrefabs.Length)];
 
-        GameObject asteroidInstance = Instantiate(
-            selectedAsteroid,
-            worldSpawnPoint,
-            Quaternion.Euler(0f, 0f, Random.Range(0f, 360f)));
+        // GameObject asteroidInstance = Instantiate(
+        //     selectedAsteroid,
+        //     worldSpawnPoint,
+        //     Quaternion.Euler(0f, 0f, Random.Range(0f, 360f)));
+        GameObject asteroidInstance = ObjectPooler.instance.SpawnFromPool("Asteroid", worldSpawnPoint, Quaternion.Euler(0f, 0f, Random.Range(0f, 360f)));
 
         Rigidbody rb = asteroidInstance.GetComponent<Rigidbody>();
 
