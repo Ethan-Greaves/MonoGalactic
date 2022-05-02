@@ -68,4 +68,9 @@ public class MainMenu : MonoBehaviour
         SoundManager.m_SoundManagerInstance.StopMusic();
         SceneManager.LoadScene(1);
     }
+
+    public void GoToSettings()
+    {
+        SceneManager.LoadScene(2);
+    }
 }
