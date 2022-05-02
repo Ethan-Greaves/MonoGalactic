@@ -25,8 +25,8 @@ public class AndroidNotificationHandler : MonoBehaviour
 
         AndroidNotification notification = new AndroidNotification
         {
-            Title = "Energy Recharged!",
-            Text = "Your energy has recharged, come back to play again!",
+            Title = "Fuel Recharged!",
+            Text = "Your fuel has recharged, play again!",
             SmallIcon = "default",
             LargeIcon = "default",
             FireTime = dateTime

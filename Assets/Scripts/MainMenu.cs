@@ -9,7 +9,7 @@ public class MainMenu : MonoBehaviour
 {
     [SerializeField] private TMP_Text energyText;
     [SerializeField] private int maxEnergy;
-    [SerializeField] private int energyRechargeDuration;
+    [SerializeField] private float energyRechargeDuration;
     [SerializeField] private AndroidNotificationHandler androidNotificationHandler;
 
 
