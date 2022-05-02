@@ -16,26 +16,25 @@ public class MenuManager : MonoBehaviour
     private void Awake()
     {
         //This ensures that when going back and forth between screens the slider value always stays consistent
-        m_MusicVolumeSlider.value = SoundManager.Instance().GetAudioSourceVolume(SoundManager.Instance().GetMusicAudioSource());
-        m_SFXVolumeSlider.value = SoundManager.Instance().GetAudioSourceVolume(SoundManager.Instance().GetSFXAudioSource());
+        m_MusicVolumeSlider.value = SoundManager.m_SoundManagerInstance.GetAudioSourceVolume(SoundManager.m_SoundManagerInstance.GetMusicAudioSource());
+        m_SFXVolumeSlider.value = SoundManager.m_SoundManagerInstance.GetAudioSourceVolume(SoundManager.m_SoundManagerInstance.GetSFXAudioSource());
 
         m_FullscreenToggle.isOn = Screen.fullScreen;
     }
 
     public void Start()
     {
-        AddResolutionsToDropdown();
-        SetDefaultResolution();
+        
     }
 
     public void AdjustMusicVolume(float musicVol)
     {
-        SoundManager.Instance().GetMusicAudioSource().volume = musicVol;
+        SoundManager.m_SoundManagerInstance.GetMusicAudioSource().volume = musicVol;
     }
 
     public void AdjustSFXVolume(float SFXVol)
     {
-        SoundManager.Instance().GetSFXAudioSource().volume = SFXVol;
+        SoundManager.m_SoundManagerInstance.GetSFXAudioSource().volume = SFXVol;
     }
 }
 

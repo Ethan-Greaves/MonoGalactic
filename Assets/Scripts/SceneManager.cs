@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-[CreateAssetMenu(fileName = "SceneManager")]
-public class SceneHandler : ScriptableObject
+// [CreateAssetMenu(fileName = "SceneManager")]
+public class SceneHandler : MonoBehaviour
 {
     //Create a stack to store all previous scenes
     private Stack<int> m_LoadedLevels;

@@ -38,6 +38,8 @@ public class ScoreSystem : MonoBehaviour
     public void AddScore(int toAdd)
     {
         score += toAdd;
+        scoreText.text = Mathf.FloorToInt(score).ToString();
+
     }
 }
 
