@@ -9,10 +9,10 @@ public class GameOverHandler : MonoBehaviour
 {
     [SerializeField] private GameObject m_gameOverDisplay;
     [SerializeField] private AsteroidSpawner m_asteroidSpawner;
-    [SerializeField] private TMP_Text gameOverText;
+    [SerializeField] private TMP_Text m_gameOverText;
     [SerializeField] private ScoreSystem m_scoreSystem;
     [SerializeField] private GameObject m_player;
-    [SerializeField] private Button continueButton;
+    [SerializeField] private Button m_continueButton;
 
     public void ReturnToMenu()
     {
@@ -31,14 +31,14 @@ public class GameOverHandler : MonoBehaviour
     {
         m_asteroidSpawner.enabled = false;
         int finalScore = m_scoreSystem.EndTimer();
-        gameOverText.text = $"Your Score: {finalScore}";
+        m_gameOverText.text = $"Your Score: {finalScore}";
         m_gameOverDisplay.gameObject.SetActive(true);
     }
 
     public void ContinueButton()
     {
         AdManager.m_AdMangerInstance.ShowAd(this);
-        continueButton.interactable = false;
+        m_continueButton.interactable = false;
     }
 
 

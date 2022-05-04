@@ -6,42 +6,39 @@ using UnityEngine;
 
 public class ScoreSystem : MonoBehaviour
 {
-    [SerializeField] private TMP_Text scoreText;
-    [SerializeField] private float scoreMultiplier;
-
-    private bool shouldCount = true;
-    public float score;
+    [SerializeField] private TMP_Text m_scoreText;
+    [SerializeField] private float m_scoreMultiplier;
+    private bool m_shouldCount = true;
+    public float m_score;
 
     void Update()
     {
-        if (!shouldCount) { return; }
-
-        GameManager.Instance().AddScoreOverTime(1, scoreMultiplier);
-        Debug.Log(score);
+        if (!m_shouldCount) { return; }
+        GameManager.Instance().AddScoreOverTime(1, m_scoreMultiplier);
     }
 
     private void LateUpdate()
     {
-        scoreText.text = Mathf.FloorToInt(GameManager.Instance().GetScore()).ToString();
+        m_scoreText.text = Mathf.FloorToInt(GameManager.Instance().GetScore()).ToString();
     }
 
     public int EndTimer()
     {
-        shouldCount = false;
+        m_shouldCount = false;
 
-        scoreText.text = string.Empty;
+        m_scoreText.text = string.Empty;
 
-        return Mathf.FloorToInt(score);
+        return Mathf.FloorToInt(m_score);
     }
 
     public void startTimer()
     {
-        shouldCount = true;
+        m_shouldCount = true;
     }
 
     public void AddScore(float toAdd)
     {
-        score += toAdd * scoreMultiplier;
+        m_score += toAdd * m_scoreMultiplier;
     }
 }
 

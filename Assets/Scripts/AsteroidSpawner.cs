@@ -4,27 +4,25 @@ using UnityEngine;
 
 public class AsteroidSpawner : MonoBehaviour
 {
-    // [SerializeField] private GameObject[] asteroidPrefabs;
-    [SerializeField] private float secondsBetweenAsteroids = 1.5f;
-    [SerializeField] private Vector2 forceRange;
-
-    private Camera mainCamera;
-    private float timer;
+    [SerializeField] private float m_secondsBetweenAsteroids = 1.5f;
+    [SerializeField] private Vector2 m_forceRange;
+    private Camera m_mainCamera;
+    private float m_timer;
 
     void Start()
     {
-        mainCamera = Camera.main;
+        m_mainCamera = Camera.main;
     }
 
     void Update()
     {
-        timer -= Time.deltaTime;
+        m_timer -= Time.deltaTime;
 
-        if (timer <= 0)
+        if (m_timer <= 0)
         {
             SpawnAsteroid();
 
-            timer += secondsBetweenAsteroids;
+            m_timer += m_secondsBetweenAsteroids;
         }
     }
 
@@ -57,7 +55,7 @@ public class AsteroidSpawner : MonoBehaviour
                 break;
         }
 
-        Vector3 worldSpawnPoint = mainCamera.ViewportToWorldPoint(spawnPoint);
+        Vector3 worldSpawnPoint = m_mainCamera.ViewportToWorldPoint(spawnPoint);
         worldSpawnPoint.z = 0;
 
         // GameObject selectedAsteroid = asteroidPrefabs[Random.Range(0, asteroidPrefabs.Length)];
@@ -66,11 +64,11 @@ public class AsteroidSpawner : MonoBehaviour
         //     selectedAsteroid,
         //     worldSpawnPoint,
         //     Quaternion.Euler(0f, 0f, Random.Range(0f, 360f)));
-        GameObject asteroidInstance = ObjectPooler.instance.SpawnFromPool("Asteroid", worldSpawnPoint, Quaternion.Euler(0f, 0f, Random.Range(0f, 360f)));
+        GameObject asteroidInstance = ObjectPooler.m_instance.SpawnFromPool("Asteroid", worldSpawnPoint, Quaternion.Euler(0f, 0f, Random.Range(0f, 360f)));
 
         Rigidbody rb = asteroidInstance.GetComponent<Rigidbody>();
 
-        rb.velocity = direction.normalized * Random.Range(forceRange.x, forceRange.y);
+        rb.velocity = direction.normalized * Random.Range(m_forceRange.x, m_forceRange.y);
     }
 }
 

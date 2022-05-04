@@ -6,15 +6,15 @@ public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] private GameOverHandler m_gameOverHandler;
 
-    public bool isShipCrashed { get; private set; }
+    public bool m_isShipCrashed { get; private set; }
 
     private void Start()
     {
-        isShipCrashed = false;
+        m_isShipCrashed = false;
     }
     public void Crash()
     {
-        isShipCrashed = true;
+        m_isShipCrashed = true;
 
         if (GameManager.Instance().GetIsVibrationTurnedOn())
         {

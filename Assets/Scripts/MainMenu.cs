@@ -7,26 +7,26 @@ using System;
 
 public class MainMenu : MonoBehaviour
 {
-    [SerializeField] private TMP_Text energyText;
-    [SerializeField] private int maxEnergy;
-    [SerializeField] private float energyRechargeDuration;
-    [SerializeField] private AndroidNotificationHandler androidNotificationHandler;
+    [SerializeField] private TMP_Text m_energyText;
+    [SerializeField] private int m_maxEnergy;
+    [SerializeField] private float m_energyRechargeDuration;
+    [SerializeField] private AndroidNotificationHandler m_androidNotificationHandler;
 
 
-    private int energy;
+    private int m_energy;
 
-    private const string EnergyKey = "Energy";
-    private const string EnergyReadyKey = "EnergyReady";
+    private const string m_EnergyKey = "Energy";
+    private const string m_EnergyReadyKey = "EnergyReady";
 
     private void Start()
     {
         SoundManager.m_SoundManagerInstance.PlayMainMenuMusic();
 
-        energy = PlayerPrefs.GetInt(EnergyKey, maxEnergy);
+        m_energy = PlayerPrefs.GetInt(m_EnergyKey, m_maxEnergy);
 
-        if (energy == 0)
+        if (m_energy == 0)
         {
-            string energyReadyString = PlayerPrefs.GetString(EnergyReadyKey, string.Empty);
+            string energyReadyString = PlayerPrefs.GetString(m_EnergyReadyKey, string.Empty);
 
             if (energyReadyString == string.Empty) { return; }
 
@@ -34,31 +34,31 @@ public class MainMenu : MonoBehaviour
 
             if (DateTime.Now > energyReady)
             {
-                energy = maxEnergy;
-                PlayerPrefs.SetInt(EnergyKey, energy);
+                m_energy = m_maxEnergy;
+                PlayerPrefs.SetInt(m_EnergyKey, m_energy);
             }
         }
 
-        energyText.text = $"Tap To Start ({energy})";
+        m_energyText.text = $"Tap To Start ({m_energy})";
 
     }
 
     public void StartGame()
     {
         // GameManager.Instance().RemoveEnergy();
-        if (energy < 1) { return; }
+        if (m_energy < 1) { return; }
 
-        energy--;
+        m_energy--;
 
-        PlayerPrefs.SetInt(EnergyKey, energy);
+        PlayerPrefs.SetInt(m_EnergyKey, m_energy);
 
-        if (energy == 0)
+        if (m_energy == 0)
         {
-            DateTime energyReady = DateTime.Now.AddMinutes(energyRechargeDuration);
-            PlayerPrefs.SetString(EnergyReadyKey, energyReady.ToString());
+            DateTime energyReady = DateTime.Now.AddMinutes(m_energyRechargeDuration);
+            PlayerPrefs.SetString(m_EnergyReadyKey, energyReady.ToString());
 
 #if UNITY_ANDROID
-            androidNotificationHandler.ScheduleNotification(energyReady);
+            m_androidNotificationHandler.ScheduleNotification(energyReady);
 #endif
 
         }

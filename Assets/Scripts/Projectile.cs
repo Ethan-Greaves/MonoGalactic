@@ -5,37 +5,26 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     [Range(0, 100)]
-    [SerializeField] float speed;
-    [SerializeField] int damage = 25;
+    [SerializeField] float m_speed;
     [SerializeField] private AudioClip m_projectileSFX;
-
     private Player m_player;
-
-    Rigidbody rb;
-
-    //Getters
-    public int GetDamage() { return damage; }
+    Rigidbody m_rigidBody;
 
     // Start is called before the first frame update
     void Start()
     {
         m_player = FindObjectOfType<Player>();
-        FireProjectile();
+        PlayProjectileSfx();
     }
 
     private void Update()
     {
-        transform.Translate(Vector3.forward * speed * Time.deltaTime);
+        transform.Translate(Vector3.forward * m_speed * Time.deltaTime);
     }
 
-    private void FireProjectile()
+    private void PlayProjectileSfx()
     {
         SoundManager.m_SoundManagerInstance.PlaySFX(m_projectileSFX);
-
-        // rb = GetComponent<Rigidbody>();
-        // rb.velocity = m_player.gameObject.transform.forward * (speed * Time.deltaTime);
-        //rb.AddForce(m_player.gameObject.transform.forward * speed);
-        // rb.velocity = m_player.transform.rotation * (speed * Time.deltaTime);
     }
 
     private void OnBecameInvisible()

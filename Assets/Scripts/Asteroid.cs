@@ -23,7 +23,10 @@ public class Asteroid : MonoBehaviour
 
     private void Update()
     {
-        transform.rotation = Quaternion.Euler(m_xSpin += m_rotationSpeed, m_ySpin, m_zSpin += m_rotationSpeed);
+        transform.rotation = Quaternion.Euler
+            (m_xSpin += m_rotationSpeed * Time.deltaTime, 
+             m_ySpin += m_rotationSpeed * Time.deltaTime, 
+             m_zSpin += m_rotationSpeed * Time.deltaTime);
     }
 
     private void OnTriggerEnter(Collider other)

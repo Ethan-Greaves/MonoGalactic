@@ -9,13 +9,13 @@ using UnityEngine;
 public class AndroidNotificationHandler : MonoBehaviour
 {
 #if UNITY_ANDROID
-    private const string ChannelId = "notification_channel";
+    private const string m_channelId = "notification_channel";
 
     public void ScheduleNotification(DateTime dateTime)
     {
         AndroidNotificationChannel notificationChannel = new AndroidNotificationChannel
         {
-            Id = ChannelId,
+            Id = m_channelId,
             Name = "Notification Channel",
             Description = "Some random description",
             Importance = Importance.Default
@@ -32,7 +32,7 @@ public class AndroidNotificationHandler : MonoBehaviour
             FireTime = dateTime
         };
 
-        AndroidNotificationCenter.SendNotification(notification, ChannelId);
+        AndroidNotificationCenter.SendNotification(notification, m_channelId);
     }
 #endif
 }

@@ -7,12 +7,9 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     private static GameManager m_GameMangerInstance;
-    private SceneNavigation m_SceneNavigation;
     private Player m_Player;
-    private static bool m_bIsPaused;
     private static float m_iScore = 0;
-
-    private bool isVibrationTurnedOn;
+    private bool m_isVibrationTurnedOn;
 
     public static GameManager Instance()
     {
@@ -28,14 +25,10 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
-        m_bIsPaused = false;
-        isVibrationTurnedOn = false;
-        // m_SceneNavigation = Resources.Load<SceneNavigation>("SceneManager");
+        m_isVibrationTurnedOn = false;
 
         if (m_Player != null)
             m_Player = GameObject.FindWithTag("Player").GetComponent<Player>();
-
-
     }
     #endregion
 
@@ -64,15 +57,13 @@ public class GameManager : MonoBehaviour
     #endregion
 
     #region VIBRATION
-
     public bool GetIsVibrationTurnedOn()
     {
-        return isVibrationTurnedOn;
+        return m_isVibrationTurnedOn;
     }
     public void SetIsVibrationTurnedOn(bool value)
     {
-        isVibrationTurnedOn = value;
+        m_isVibrationTurnedOn = value;
     }
-
     #endregion
 }

@@ -31,7 +31,7 @@ public class Player : MonoBehaviour
         m_PlayerMovement.ProcessInput();
         m_PlayerMovement.RotateToFaceVelocity();
         m_PlayerMovement.KeepPlayerOnScreen();
-        m_PlayerShooting.ShootOnTimer(m_PlayerController.CheckJoystickInput(), m_PlayerHealth.isShipCrashed);
+        m_PlayerShooting.ShootOnTimer(m_PlayerController.CheckJoystickInput(), m_PlayerHealth.m_isShipCrashed);
     }
 
     private void FixedUpdate()
@@ -41,7 +41,7 @@ public class Player : MonoBehaviour
 
     private void UnlockBlueShip()
     {
-        if (PlayerPrefs.GetInt(Store.newShipUnlockedKey, 0) == 1)
+        if (PlayerPrefs.GetInt(Store.m_newShipUnlockedKey, 0) == 1)
         {
             GetComponentInChildren<Renderer>().material.SetColor("_Color", Color.blue);
         }

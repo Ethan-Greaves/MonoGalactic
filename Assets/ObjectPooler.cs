@@ -12,21 +12,21 @@ public class ObjectPooler : MonoBehaviour
         public int size;
     }
 
-    public static ObjectPooler instance;
+    public static ObjectPooler m_instance;
 
     private void Awake() {
-        instance = this;
+        m_instance = this;
     }
 
-    public List<Pool> pools;
-    public Dictionary<string, Queue<GameObject>> poolDictionary;
+    public List<Pool> m_pools;
+    public Dictionary<string, Queue<GameObject>> m_poolDictionary;
 
     // Start is called before the first frame update
     void Start()
     {
-        poolDictionary = new Dictionary<string, Queue<GameObject>>();
+        m_poolDictionary = new Dictionary<string, Queue<GameObject>>();
 
-        foreach (Pool pool in pools)
+        foreach (Pool pool in m_pools)
         {
             Queue<GameObject> objectPool = new Queue<GameObject>();
 
@@ -37,24 +37,24 @@ public class ObjectPooler : MonoBehaviour
                 objectPool.Enqueue(obj);
             }
 
-            poolDictionary.Add(pool.tag, objectPool);
+            m_poolDictionary.Add(pool.tag, objectPool);
         }
     }
 
     public GameObject SpawnFromPool(string tag, Vector3 position, Quaternion rotation)
     {
-        if (!poolDictionary.ContainsKey(tag))
+        if (!m_poolDictionary.ContainsKey(tag))
         {
             Debug.Log($"Pool with tag {tag} doesnt exist");
             return null;
         }
 
-        GameObject objectToSpawn = poolDictionary[tag].Dequeue();
+        GameObject objectToSpawn = m_poolDictionary[tag].Dequeue();
         objectToSpawn.SetActive(true);
         objectToSpawn.transform.position = position;
         objectToSpawn.transform.rotation = rotation;
 
-        poolDictionary[tag].Enqueue(objectToSpawn);
+        m_poolDictionary[tag].Enqueue(objectToSpawn);
 
         return objectToSpawn;
     }

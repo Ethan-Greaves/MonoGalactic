@@ -115,7 +115,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_minRotation: 270
   m_maxRotation: 360
-  m_rotationSpeed: 0.5
+  m_rotationSpeed: 100
 --- !u!64 &2709444809504126762
 MeshCollider:
   m_ObjectHideFlags: 0

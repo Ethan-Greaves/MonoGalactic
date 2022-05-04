@@ -5,14 +5,14 @@ using UnityEngine.Purchasing;
 
 public class Store : MonoBehaviour
 {
-    private const string newCarId = "com.ethangreaves.monogalactic.newship";
-    public const string newShipUnlockedKey = "NewShipUnlocked";
+    private const string m_newCarId = "com.ethangreaves.monogalactic.newship";
+    public const string m_newShipUnlockedKey = "NewShipUnlocked";
 
     public void OnPurchaseComplete(Product product)
     {
-        if (product.definition.id == newCarId)
+        if (product.definition.id == m_newCarId)
         {
-            PlayerPrefs.SetInt(newShipUnlockedKey, 1);
+            PlayerPrefs.SetInt(m_newShipUnlockedKey, 1);
         }
     }
 
