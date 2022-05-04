@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerShooting : MonoBehaviour
 {
     [SerializeField] private Projectile m_projectile;
-    private int m_delayBetweenShots = 1;
+    private float m_delayBetweenShots = 0.5f;
     private float m_timer;
 
 
