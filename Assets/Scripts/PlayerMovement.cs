@@ -10,8 +10,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float m_forceMagnitude;
     [SerializeField] private float m_maxVelocity;
     [SerializeField] private Joystick m_joystick;
-    [SerializeField] private float rotationSpeed;
-
+    [SerializeField] private float m_rotationSpeed;
     [SerializeField] private float m_speed;
 
 
@@ -21,26 +20,9 @@ public class PlayerMovement : MonoBehaviour
     {
         m_mainCamera = Camera.main;
         m_rigidbody = GetComponent<Rigidbody>();
-        // m_joystick = FindObjectOfType<Joystick>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        ProcessInput();
-        KeepPlayerOnScreen();
-        RotateToFaceVelocity();
-    }
-
-    private void FixedUpdate()
-    {
-        if (m_movementDirection == Vector3.zero) return;
-        m_rigidbody.AddForce(m_movementDirection * m_forceMagnitude * Time.deltaTime, ForceMode.Force);
-        m_rigidbody.velocity = Vector3.ClampMagnitude(m_rigidbody.velocity, m_maxVelocity);
-
-    }
-
-    private void ProcessInput()
+    public void ProcessInput()
     {
         if (Touchscreen.current.primaryTouch.press.isPressed)
         {
@@ -58,7 +40,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void KeepPlayerOnScreen()
+    public void KeepPlayerOnScreen()
     {
         Vector3 newPosition = transform.position;
         Vector3 viewportPosition = m_mainCamera.WorldToViewportPoint(transform.position);
@@ -84,14 +66,21 @@ public class PlayerMovement : MonoBehaviour
         transform.position = newPosition;
     }
 
-    private void RotateToFaceVelocity()
+    public void RotateToFaceVelocity()
     {
         if (m_rigidbody.velocity == Vector3.zero) { return; }
 
         Quaternion targetRotation = Quaternion.LookRotation(m_rigidbody.velocity, Vector3.back);
 
         transform.rotation = Quaternion.Lerp(
-            transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            transform.rotation, targetRotation, m_rotationSpeed * Time.deltaTime);
+    }
+
+    public void ApplyPhysics()
+    {
+        if (m_movementDirection == Vector3.zero) return;
+        m_rigidbody.AddForce(m_movementDirection * m_forceMagnitude * Time.deltaTime, ForceMode.Force);
+        m_rigidbody.velocity = Vector3.ClampMagnitude(m_rigidbody.velocity, m_maxVelocity);
     }
 
 }

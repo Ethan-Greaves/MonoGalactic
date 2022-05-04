@@ -6,16 +6,13 @@ public class PlayerController : MonoBehaviour
 {
     private Joystick m_joystick;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         m_joystick = FindObjectOfType<Joystick>();
     }
-
-    // Update is called once per frame
-    void Update()
+    // Start is called before the first frame update
+    void Start()
     {
-        CheckJoystickInput();
     }
 
     public bool CheckJoystickInput()

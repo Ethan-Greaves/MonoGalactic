@@ -13,8 +13,6 @@ public class GameOverHandler : MonoBehaviour
     [SerializeField] private ScoreSystem m_scoreSystem;
     [SerializeField] private GameObject m_player;
     [SerializeField] private Button continueButton;
-    // [SerializeField] private TMP_Text energyText;
-
 
     public void ReturnToMenu()
     {
@@ -32,12 +30,8 @@ public class GameOverHandler : MonoBehaviour
     public void EndGame()
     {
         m_asteroidSpawner.enabled = false;
-
         int finalScore = m_scoreSystem.EndTimer();
         gameOverText.text = $"Your Score: {finalScore}";
-
-        // energyText.text = $"Play Again ({GameManager.Instance().GetEnergy()})";
-
         m_gameOverDisplay.gameObject.SetActive(true);
     }
 

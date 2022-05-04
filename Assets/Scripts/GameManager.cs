@@ -39,41 +39,6 @@ public class GameManager : MonoBehaviour
     }
     #endregion
 
-    #region PAUSE FUNCTIONALITY
-    public void PauseGame()
-    {
-        if (m_bIsPaused)
-            ResumeGame();
-        else
-            RunPauseFunctionality();
-    }
-
-    private void RunPauseFunctionality()
-    {
-        Time.timeScale = 0f;
-        m_SceneNavigation.LoadSceneByNameAdditive("Pause Menu");
-        m_bIsPaused = true;
-        // SoundManager.Instance().PauseMusic();
-    }
-
-    public void ResumeGame()
-    {
-        if (m_SceneNavigation.IsCurrentScene("Main Level"))
-            m_SceneNavigation.RemoveScene("Pause Menu");
-
-        Time.timeScale = 1f;
-        m_bIsPaused = false;
-
-        // SoundManager.Instance().ResumeMusic();
-    }
-
-    public void SetIsPaused(bool set)
-    {
-        m_bIsPaused = set;
-    }
-
-    #endregion
-
     #region SCORE FUNCTIONALITY
 
     public float GetScore() { return m_iScore; }
