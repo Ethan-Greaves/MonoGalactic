@@ -347,7 +347,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5f1ae6adb2b98b46a7673668a62bd06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  testMode: 1
+  m_testMode: 1
 --- !u!4 &610092224
 Transform:
   m_ObjectHideFlags: 0
@@ -647,10 +647,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b09e7a3fe85aa14a9e5a87fa7d84bd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  energyText: {fileID: 521990649}
-  maxEnergy: 5
-  energyRechargeDuration: 0.5
-  androidNotificationHandler: {fileID: 688660610}
+  m_energyText: {fileID: 521990649}
+  m_maxEnergy: 5
+  m_energyRechargeDuration: 0.5
+  m_androidNotificationHandler: {fileID: 688660610}
 --- !u!4 &688660609
 Transform:
   m_ObjectHideFlags: 0

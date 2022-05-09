@@ -11,6 +11,11 @@ public class PlayerController : MonoBehaviour
         m_joystick = FindObjectOfType<Joystick>();
     }
 
+    public Joystick GetJoystick()
+    {
+        return m_joystick;
+    }
+
     public bool CheckJoystickInput()
     {
         float xInput = m_joystick.Horizontal * 1;

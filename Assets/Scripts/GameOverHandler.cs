@@ -23,7 +23,6 @@ public class GameOverHandler : MonoBehaviour
 
     public void PlayAgain()
     {
-        // GameManager.Instance().RemoveEnergy();
         GameManager.Instance().PlayAgain();
     }
 

@@ -28,7 +28,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         m_PlayerController.CheckJoystickInput();
-        m_PlayerMovement.ProcessInput();
+        m_PlayerMovement.ProcessInput(m_PlayerController.GetJoystick());
         m_PlayerMovement.RotateToFaceVelocity();
         m_PlayerMovement.KeepPlayerOnScreen();
         m_PlayerShooting.ShootOnTimer(m_PlayerController.CheckJoystickInput(), m_PlayerHealth.m_isShipCrashed);

@@ -10,7 +10,6 @@ public class Settings : MonoBehaviour
 {
     [SerializeField] Slider m_MusicVolumeSlider;
     [SerializeField] Slider m_SFXVolumeSlider;
-
     [SerializeField] Toggle m_VibrationToggle;
 
 

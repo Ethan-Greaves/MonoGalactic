@@ -6,6 +6,7 @@ public class AsteroidSpawner : MonoBehaviour
 {
     [SerializeField] private float m_secondsBetweenAsteroids = 1.5f;
     [SerializeField] private Vector2 m_forceRange;
+    [SerializeField] private ObjectPooler m_objectPooler;
     private Camera m_mainCamera;
     private float m_timer;
 
@@ -29,7 +30,6 @@ public class AsteroidSpawner : MonoBehaviour
     private void SpawnAsteroid()
     {
         int side = Random.Range(0, 3);
-
         Vector2 spawnPoint = Vector2.zero;
         Vector2 direction = Vector2.zero;
 
@@ -57,18 +57,9 @@ public class AsteroidSpawner : MonoBehaviour
 
         Vector3 worldSpawnPoint = m_mainCamera.ViewportToWorldPoint(spawnPoint);
         worldSpawnPoint.z = 0;
-
-        // GameObject selectedAsteroid = asteroidPrefabs[Random.Range(0, asteroidPrefabs.Length)];
-
-        // GameObject asteroidInstance = Instantiate(
-        //     selectedAsteroid,
-        //     worldSpawnPoint,
-        //     Quaternion.Euler(0f, 0f, Random.Range(0f, 360f)));
-        GameObject asteroidInstance = ObjectPooler.m_instance.SpawnFromPool("Asteroid", worldSpawnPoint, Quaternion.Euler(0f, 0f, Random.Range(0f, 360f)));
-
-        Rigidbody rb = asteroidInstance.GetComponent<Rigidbody>();
-
-        rb.velocity = direction.normalized * Random.Range(m_forceRange.x, m_forceRange.y);
+        GameObject asteroidInstance = m_objectPooler.SpawnFromPool("Asteroid", worldSpawnPoint, Quaternion.Euler(0f, 0f, Random.Range(0f, 360f)));
+        Rigidbody rigidBody = asteroidInstance.GetComponent<Rigidbody>();
+        rigidBody.velocity = direction.normalized * Random.Range(m_forceRange.x, m_forceRange.y);
     }
 }
 

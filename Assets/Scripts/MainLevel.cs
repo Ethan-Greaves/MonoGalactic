@@ -9,10 +9,4 @@ public class MainLevel : MonoBehaviour
     {
         SoundManager.m_SoundManagerInstance.PlaylevelMusic();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

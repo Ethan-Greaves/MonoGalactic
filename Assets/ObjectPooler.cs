@@ -4,40 +4,29 @@ using UnityEngine;
 
 public class ObjectPooler : MonoBehaviour
 {
-    [System.Serializable]
-    public class Pool
+    [SerializeField] private List<Pool> m_pools;
+    [SerializeField] private Dictionary<string, Queue<GameObject>> m_poolDictionary;
+
+    private void Awake()
     {
-        public string tag;
-        public GameObject prefab;
-        public int size;
+        m_poolDictionary = new Dictionary<string, Queue<GameObject>>();
     }
-
-    public static ObjectPooler m_instance;
-
-    private void Awake() {
-        m_instance = this;
-    }
-
-    public List<Pool> m_pools;
-    public Dictionary<string, Queue<GameObject>> m_poolDictionary;
 
     // Start is called before the first frame update
     void Start()
     {
-        m_poolDictionary = new Dictionary<string, Queue<GameObject>>();
-
         foreach (Pool pool in m_pools)
         {
             Queue<GameObject> objectPool = new Queue<GameObject>();
 
-            for (int i = 0; i < pool.size; i++)
+            for (int i = 0; i < pool.GetSize(); i++)
             {
-                GameObject obj = Instantiate(pool.prefab);
+                GameObject obj = Instantiate(pool.GetPrefab());
                 obj.SetActive(false);
                 objectPool.Enqueue(obj);
             }
 
-            m_poolDictionary.Add(pool.tag, objectPool);
+            m_poolDictionary.Add(pool.GetTag(), objectPool);
         }
     }
 

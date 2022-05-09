@@ -9,28 +9,25 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody m_rigidbody;
     [SerializeField] private float m_forceMagnitude;
     [SerializeField] private float m_maxVelocity;
-    [SerializeField] private Joystick m_joystick;
     [SerializeField] private float m_rotationSpeed;
     [SerializeField] private float m_speed;
-
-
     private Vector3 m_movementDirection;
-    // Start is called before the first frame update
-    void Start()
+
+    private void Awake()
     {
         m_mainCamera = Camera.main;
         m_rigidbody = GetComponent<Rigidbody>();
     }
 
-    public void ProcessInput()
+    public void ProcessInput(Joystick joystick)
     {
         if (Touchscreen.current.primaryTouch.press.isPressed)
         {
             Vector2 touchPos = Touchscreen.current.primaryTouch.position.ReadValue();
             Vector3 worldPos = m_mainCamera.ScreenToWorldPoint(touchPos);
 
-            m_movementDirection.x = m_joystick.Horizontal * m_speed;
-            m_movementDirection.y = m_joystick.Vertical * m_speed;
+            m_movementDirection.x = joystick.Horizontal * m_speed;
+            m_movementDirection.y = joystick.Vertical * m_speed;
             m_movementDirection.z = 0f;
             m_movementDirection.Normalize();
         }

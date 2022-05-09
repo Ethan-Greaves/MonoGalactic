@@ -28,7 +28,7 @@ public class ScoreSystem : MonoBehaviour
 
         m_scoreText.text = string.Empty;
 
-        return Mathf.FloorToInt(m_score);
+        return Mathf.FloorToInt(GameManager.Instance().GetScore());
     }
 
     public void startTimer()

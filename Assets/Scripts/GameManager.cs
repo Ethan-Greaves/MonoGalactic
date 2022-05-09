@@ -6,17 +6,16 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    private static GameManager m_GameMangerInstance;
-    private Player m_Player;
-    private static float m_iScore = 0;
-    private bool m_isVibrationTurnedOn;
+    private static GameManager m_gameMangerInstance;
+    private static float m_score = 0;
+    private static bool m_isVibrationTurnedOn;
 
     public static GameManager Instance()
     {
-        if (m_GameMangerInstance == null)
-            m_GameMangerInstance = new GameObject("Game Manager", typeof(GameManager)).GetComponent<GameManager>();
+        if (m_gameMangerInstance == null)
+            m_gameMangerInstance = new GameObject("Game Manager", typeof(GameManager)).GetComponent<GameManager>();
 
-        return m_GameMangerInstance;
+        return m_gameMangerInstance;
     }
 
     #region INITILISATION
@@ -26,21 +25,18 @@ public class GameManager : MonoBehaviour
     {
         DontDestroyOnLoad(this.gameObject);
         m_isVibrationTurnedOn = false;
-
-        if (m_Player != null)
-            m_Player = GameObject.FindWithTag("Player").GetComponent<Player>();
     }
     #endregion
 
     #region SCORE FUNCTIONALITY
 
-    public float GetScore() { return m_iScore; }
-    public void ResetScore() { m_iScore = 0; }
-    public void AddScore(int scoreToAdd) { m_iScore += scoreToAdd; }
+    public float GetScore() { return m_score; }
+    public void ResetScore() { m_score = 0; }
+    public void AddScore(int scoreToAdd) { m_score += scoreToAdd; }
 
     public void AddScoreOverTime(float scoreToAdd, float multiplier)
     {
-        m_iScore += scoreToAdd * Time.deltaTime * multiplier;
+        m_score += scoreToAdd * Time.deltaTime * multiplier;
     }
     #endregion
 
